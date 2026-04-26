@@ -2,68 +2,6 @@
 
 {% block title %}Danspotting{% endblock %}
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='danspotting.css') }}">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-{% endblock %}
-
 {% block content %}
-  <div class="page-header">
-    <h1>Danspotting</h1>
-    <p class="hero-sub">Here's where you would've caught a glimpse of me.</p>
-  </div>
-  <div id="map"></div>
-{% endblock %}
-
-{% block extra_js %}
-  <script>
-    const map = L.map('map', {
-      center: [20, 0],
-      zoom: 2,
-      zoomControl: true,
-      scrollWheelZoom: false
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-      maxZoom: 18
-    }).addTo(map);
-
-    const locations = [
-        { name: "New York", coords: [40.7128, -74.0060], home: true },
-        { name: "Santo Domingo", coords: [18.4861, -69.9312] },
-        { name: "Hong Kong", coords: [22.3193, 114.1694] },
-        { name: "Shenzhen", coords: [22.5431, 114.0579] },
-        { name: "Taipei", coords: [25.0330, 121.5654] },
-        { name: "Kaohsiung", coords: [22.6273, 120.3014] },
-        { name: "London", coords: [51.5074, -0.1278] },
-        { name: "Paris", coords: [48.8566, 2.3522] },
-        { name: "Tokyo", coords: [35.6762, 139.6503] },
-        { name: "Austin", coords: [30.2672, -97.7431] },
-        { name: "Osaka", coords: [34.6937, 135.5023] },
-        { name: "Kyoto", coords: [35.0116, 135.7681] },
-        { name: "Las Vegas", coords: [36.1699, -115.1398] },
-        { name: "Atlanta", coords: [33.7490, -84.3880] },
-        { name: "Los Angeles", coords: [34.0522, -118.2437] },
-        { name: "Asheville", coords: [35.5951, -82.5515] },
-        { name: "Seoul", coords: [37.5665, 126.9780] },
-        { name: "Montreal", coords: [45.5017, -73.5673] }
-    ];  
-
-    locations.forEach(loc => {
-    const pinIcon = L.divIcon({
-        className: '',
-        html: `<div class="pin-wrapper">
-                  <div class="${loc.home ? 'home-pin' : 'custom-pin'}"></div>
-                  <div class="pin-label">${loc.home ? 'New York (Home)' : loc.name}</div>
-               </div>`,
-        iconSize: null,
-        iconAnchor: [7, 7]
-    });
-
-    L.marker(loc.coords, { icon: pinIcon })
-        .addTo(map);
-    });
-  </script>
+  {% include "partials/danspotting_fragment.html" %}
 {% endblock %}

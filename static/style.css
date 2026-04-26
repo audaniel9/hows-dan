@@ -179,8 +179,8 @@ body {
     }
 }
 
-/* Tablet + Mobile (anything below 1024px) */
-@media (max-width: 1024px) {
+/* Tablet + Mobile (anything below 900px) */
+@media (max-width: 900px) {
     .layout {
         flex-direction: column;
     }

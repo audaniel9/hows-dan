@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}How's Dan?{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% block extra_css %}{% endblock %}
+      <title>{% block title %}How's Dan?{% endblock %}</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='danspotting.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='food.css') }}">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.min.js"></script>
+      {% block extra_css %}{% endblock %}
   </head>
   <body>
     <div class="layout">
       <nav class="sidebar">
-        <a href="/" class="{{ 'active' if request.path == '/' }}">Home</a>
-        <a href="/danspotting" class="{{ 'active' if request.path == '/danspotting' }}">Danspotting</a>
-        <a href="/food" class="{{ 'active' if request.path == '/food' }}">Food</a>
+        <a href="/"
+          hx-get="/partial/"
+          hx-target="#content"
+          hx-push-url="/"
+          class="{{ 'active' if request.path == '/' }}">Home</a>
+        <a href="/danspotting"
+          hx-get="/partial/danspotting"
+          hx-target="#content"
+          hx-push-url="/danspotting"
+          class="{{ 'active' if request.path == '/danspotting' }}">Danspotting</a>
+        <a href="/food"
+          hx-get="/partial/food"
+          hx-target="#content"
+          hx-push-url="/food"
+          class="{{ 'active' if request.path == '/food' }}">Food</a>
       </nav>
-      <main class="main">
+      <main class="main" id="content">
         {% block content %}{% endblock %}
       </main>
     </div>
-    {% block extra_js %}{% endblock %}
-
     <script>
       document.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", function(e) {
           const href = this.getAttribute("href");
           if (!href || href === "#" || href.startsWith("http")) return;
-          e.preventDefault();
-          const main = document.querySelector(".main");
-          main.style.transition = "opacity 0.2s ease, transform 0.2s ease";
-          main.style.opacity = "0";
-          main.style.transform = "translateY(8px)";
-          setTimeout(() => window.location.href = href, 200);
+          document.querySelectorAll(".sidebar a").forEach(a => a.classList.remove("active"));
+          this.classList.add("active");
         });
       });
+
+      document.addEventListener("htmx:afterSwap", function() {
+        const main = document.querySelector(".main");
+        main.style.animation = "none";
+        main.offsetHeight;
+        main.style.animation = "fadeIn 0.3s ease";
+      });
     </script>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>

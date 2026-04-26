@@ -3,21 +3,5 @@
 {% block title %}How's Dan?{% endblock %}
 
 {% block content %}
-  <div class="content">
-    <div class="left-col">
-      <div class="hero">
-        <h1>How's Dan?</h1>
-        <p class="hero-sub">Keep up with me on my experiences.</p>
-        <span class="tag">New York</span>
-      </div>
-      <div class="card">
-        <p>Hi, I'm Dan — a curious person with a passion for building things and exploring ideas. I've worn many hats over the years, from tinkering with code to diving deep into creative projects. This site is my space to share what I'm up to, what I'm learning, and what's keeping me busy. Pull up a chair and stay a while.</p>
-      </div>
-    </div>
-    <div class="right-col">
-      <div class="polaroid">
-        <img src="{{ url_for('static', filename='headshot.jpg') }}" alt="Dan at the beach">
-      </div>
-    </div>
-  </div>
+  {% include "partials/home_fragment.html" %}
 {% endblock %}

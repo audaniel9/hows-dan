@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>Food Journey</h1>
+  <p class="hero-sub">A photo journal of the things I've eaten and loved.</p>
+</div>
+
+{% if photos %}
+  <div class="photo-grid">
+    {% for photo in photos %}
+      <div class="photo-item" onclick="openLightbox(this)">
+        <img src="/static/{{ photo.full }}" alt="{{ photo.label }}" loading="lazy">
+        <div class="photo-label">{{ photo.label }}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="no-photos">No photos yet — check back soon!</p>
+{% endif %}
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded food photo">
+</div>
+
+<script>
+  function openLightbox(item) {
+    const src = item.querySelector("img").src;
+    document.getElementById("lightbox-img").src = src;
+    document.getElementById("lightbox").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeLightbox();
+  });
+</script>
