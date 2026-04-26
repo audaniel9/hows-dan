@@ -140,6 +140,45 @@ body {
     display: block;
 }
 
+/* Shared page header */
+.page-header {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.page-header h1 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -2px;
+    line-height: 1.0;
+}
+
+.page-header .hero-sub {
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: #666;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Page transitions */
+.main {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Tablet + Mobile (anything below 1024px) */
 @media (max-width: 1024px) {
     .layout {
