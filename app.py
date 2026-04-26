@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from dotenv import load_dotenv
 import os
 
@@ -47,4 +47,4 @@ def partial_food():
     return render_template("partials/food_fragment.html", photos=get_photos())
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.getenv("DEBUG", "False") == "True")
