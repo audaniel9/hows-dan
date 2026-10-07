@@ -21,14 +21,13 @@
       scrollWheelZoom: false
     });
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-      maxZoom: 18
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>',
+        maxZoom: 20
     }).addTo(map);
 
     const locations = [
       { name: "New York", coords: [40.7128, -74.0060], home: true },
-      { name: "Santo Domingo", coords: [18.4861, -69.9312] },
       { name: "Hong Kong", coords: [22.3193, 114.1694] },
       { name: "Shenzhen", coords: [22.5431, 114.0579] },
       { name: "Taipei", coords: [25.0330, 121.5654] },
@@ -44,7 +43,8 @@
       { name: "Los Angeles", coords: [34.0522, -118.2437] },
       { name: "Asheville", coords: [35.5951, -82.5515] },
       { name: "Seoul", coords: [37.5665, 126.9780] },
-      { name: "Montreal", coords: [45.5017, -73.5673] }
+      { name: "Montreal", coords: [45.5017, -73.5673] },
+      { name: "Fukuoka", coords: [33.5904, 130.4017] },
     ];
 
     locations.forEach(loc => {
